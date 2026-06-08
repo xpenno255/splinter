@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Splinter — High-Energy Rock Covers | Black Country</title>
+  <meta name="description" content="Splinter — a high-energy rock covers band from the Black Country, smashing out the best heavy rock from the past five decades. Book us for your event." />
+
+  <meta property="og:title" content="Splinter — High-Energy Rock Covers" />
+  <meta property="og:description" content="Heavy rock covers from the Black Country — AC/DC, Guns N' Roses, Sabbath, Muse, Royal Blood, QOTSA and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo.jpg" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <!-- EDIT ME: this is the nav wordmark logo -->
+    <a class="nav__brand" href="#home" aria-label="Splinter — home"><img src="assets/logo-text.png" alt="Splinter" class="nav__logo" /></a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#home" class="nav__link is-active">Home</a>
+      <a href="#bio" class="nav__link">Bio</a>
+      <a href="#gigs" class="nav__link">Gigs</a>
+      <a href="#videos" class="nav__link">Videos</a>
+      <a href="#contact" class="nav__link">Contact</a>
+    </nav>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ===================== HERO / HOME ===================== -->
+    <section class="hero" id="home">
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal">Modern &amp; Classic Hard Rock Covers</p>
+        <h1 class="hero__logo reveal" style="--d:1"><img src="assets/logo.jpg" alt="Splinter" /></h1>
+        <div class="hero__cta reveal" style="--d:2">
+          <a href="#gigs" class="btn btn--solid">Live dates</a>
+          <a href="#videos" class="btn btn--ghost">Watch us play</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Black Stone Cherry ✦ Muse ✦ Royal Blood ✦ Queens Of The Stone Age ✦&nbsp;</span>
+        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Black Stone Cherry ✦ Muse ✦ Royal Blood ✦ Queens Of The Stone Age ✦&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- ===================== BIO ===================== -->
+    <section class="section bio" id="bio">
+      <div class="section__head">
+        <span class="section__index">01</span>
+        <h2 class="section__title">The Band</h2>
+      </div>
+      <div class="bio__grid bio__grid--solo">
+        <figure class="bio__portrait" hidden>
+          <div class="bio__portrait-frame">
+            <!-- EDIT ME: drop a band photo at assets/band.jpg, point this here, then remove the `hidden` above to show it -->
+            <img src="assets/portrait-placeholder.svg" alt="Splinter live on stage" />
+          </div>
+        </figure>
+        <div class="bio__text">
+          <p class="bio__lead">
+            Splinter — a high-energy rock covers band from the Black Country,
+            smashing out the best heavy rock tracks from the past five decades.
+          </p>
+          <p>
+            From AC/DC, Guns N’ Roses and Black Sabbath through to Black Stone Cherry,
+            Muse, Royal Blood and Queens of the Stone Age — if it’s loud and it riffs,
+            it’s in the set. Expect a relentless, high-octane show built to get a room moving.
+          </p>
+          <ul class="bio__facts">
+            <li><span>Based in</span> The Black Country, UK</li>
+            <li><span>Style</span> Heavy rock covers</li>
+            <li><span>For fans of</span> AC/DC · Sabbath · QOTSA</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== GIGS ===================== -->
+    <section class="section gigs" id="gigs">
+      <div class="section__head">
+        <span class="section__index">02</span>
+        <h2 class="section__title">Live Dates</h2>
+      </div>
+      <div class="gigs__body">
+        <div class="gigs__group">
+          <h3 class="gigs__subtitle">Upcoming</h3>
+          <ul class="gig-list" id="upcomingGigs">
+            <li class="gig-list__loading">Loading dates…</li>
+          </ul>
+        </div>
+        <div class="gigs__group gigs__group--past" id="pastGroup" hidden>
+          <h3 class="gigs__subtitle">Past shows</h3>
+          <ul class="gig-list gig-list--past" id="pastGigs"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VIDEOS ===================== -->
+    <section class="section videos" id="videos">
+      <div class="section__head">
+        <span class="section__index">03</span>
+        <h2 class="section__title">Videos</h2>
+      </div>
+      <div class="video-grid" id="videoGrid">
+        <p class="video-grid__loading">Loading videos…</p>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section contact" id="contact">
+      <div class="section__head">
+        <span class="section__index">04</span>
+        <h2 class="section__title">Book Us</h2>
+      </div>
+      <div class="contact__inner">
+        <p class="contact__lead">Pubs, clubs, festivals, parties — let’s make some noise.</p>
+        <a class="contact__email" href="mailto:splinterbcc@gmail.com">splinterbcc@gmail.com</a>
+        <ul class="contact__socials" aria-label="Social links">
+          <li><a href="https://www.instagram.com/splinter.rockband/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/splinterrockband" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.youtube.com/@Splinterbcc" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Splinter</span>
+    <a href="#home" class="footer__top">Back to top ↑</a>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

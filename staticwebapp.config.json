@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/data/*", "*.{css,js,svg,jpg,png,json,ico}"]
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".svg": "image/svg+xml"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "routes": [
+    {
+      "route": "/data/*",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    {
+      "route": "/assets/*",
+      "headers": { "Cache-Control": "public, max-age=86400" }
+    }
+  ]
+}
