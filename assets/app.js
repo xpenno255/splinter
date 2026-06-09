@@ -193,7 +193,7 @@ async function loadVideos() {
   // Always offer a direct channel link below the grid.
   const foot = document.createElement("div");
   foot.className = "videos__foot";
-  foot.innerHTML = `<a class="video__channel-link" href="${CONFIG.youtubeChannelUrl}" target="_blank" rel="noopener">Browse the full channel ↗</a>`;
+  foot.innerHTML = `<a class="video__channel-link" href="${CONFIG.youtubeChannelUrl}" target="_blank" rel="noopener">Check out our YouTube Channel ↗</a>`;
   grid.after(foot);
 }
 
