@@ -1,8 +1,8 @@
 [
   { "date": "2026-07-11", "venue": "Fixed Wheel Brewery", "city": "Blackheath", "time": "", "ticketUrl": "", "status": "", "note": "" },
   { "date": "2026-07-25", "venue": "The Britannia", "city": "Rowley Village", "time": "", "ticketUrl": "", "status": "", "note": "" },
-  { "date": "2026-09-26", "venue": "Fixed Wheel Brewery", "city": "Blackheath", "time": "", "ticketUrl": "", "status": "", "note": "" },
-  { "date": "2026-10-17", "venue": "The Britannia", "city": "Rowley Village", "time": "", "ticketUrl": "", "status": "", "note": "" },
+  { "date": "2026-09-25", "venue": "The Church Venue", "city": "Kidderminster", "time": "", "ticketUrl": "", "status": "", "note": "" },
   { "date": "2026-11-21", "venue": "Fixed Wheel Brewery", "city": "Blackheath", "time": "", "ticketUrl": "", "status": "", "note": "" },
+  { "date": "2026-12-05", "venue": "The Britannia", "city": "Rowley Village", "time": "", "ticketUrl": "", "status": "", "note": "" },
   { "date": "2026-12-13", "venue": "The O Bar", "city": "Broad St, Birmingham", "time": "", "ticketUrl": "", "status": "", "note": "" }
 ]
