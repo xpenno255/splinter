@@ -8,7 +8,7 @@
    ============================================================ */
 
 const CONFIG = {
-  youtubeChannelUrl: "https://www.youtube.com/@Splinterbcc",
+  youtubeChannelUrl: "https://www.youtube.com/@Splinterrockband",
   // "Uploads" playlist = channel ID with "UC" swapped for "UU".
   // Channel UCftZF7glmrU1a_hvzWD4EDQ -> uploads UUftZF7glmrU1a_hvzWD4EDQ
   uploadsPlaylistId: "UUftZF7glmrU1a_hvzWD4EDQ"
