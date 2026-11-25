@@ -1,153 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Splinter — High-Energy Rock Covers | Black Country</title>
+  <title>Splinter — High Energy Rock Covers | Black Country</title>
   <meta name="description" content="Splinter — a high-energy rock covers band from the Black Country, smashing out the best heavy rock from the past five decades. Book us for your event." />
-
-  <meta property="og:title" content="Splinter — High-Energy Rock Covers" />
+  <meta property="og:title" content="Splinter — High Energy Rock Covers" />
   <meta property="og:description" content="Heavy rock covers from the Black Country — AC/DC, Guns N' Roses, Sabbath, Muse, Royal Blood, QOTSA and more." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/logo.jpg" />
-
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-
+  <meta property="og:image" content="assets/poster/og-poster.jpg" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="assets/poster/favicon-poster.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="assets/styles.css?v=2" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/poster/logo-poster.png" />
+  <link rel="stylesheet" href="assets/poster.css?v=4" />
 </head>
 <body>
+  <!-- Ink-bleed filter: roughens big type so it reads as printed, not rendered -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="rough-sm" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="3" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
   <div class="grain" aria-hidden="true"></div>
+  <canvas class="shards" id="shards" aria-hidden="true"></canvas>
+
+  <a class="skip" href="#band">Skip to content</a>
 
   <!-- ===================== NAV ===================== -->
   <header class="nav" id="nav">
-    <!-- EDIT ME: this is the nav wordmark logo -->
-    <a class="nav__brand" href="#home" aria-label="Splinter — home"><img src="assets/logo-text.png" alt="Splinter" class="nav__logo" /></a>
-
+    <a class="nav__brand" href="#home" aria-label="Splinter — home">
+      <img src="assets/poster/logo-poster-720.png" alt="Splinter" width="720" height="407" data-classic="assets/poster/wordmark.png" />
+    </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#home" class="nav__link is-active">Home</a>
-      <a href="#bio" class="nav__link">Bio</a>
-      <a href="#gigs" class="nav__link">Gigs</a>
+      <a href="#band" class="nav__link">The Band</a>
+      <a href="#setlist" class="nav__link">Setlist</a>
+      <a href="#gigs" class="nav__link">Live Dates</a>
       <a href="#videos" class="nav__link">Videos</a>
-      <a href="#contact" class="nav__link">Contact</a>
+      <a href="#contact" class="nav__link nav__link--cta">Book Us</a>
     </nav>
-
-    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span>Menu</span>
     </button>
   </header>
 
+  <!-- Full-screen mobile menu (sibling of the nav so it is not caught in its blend mode) -->
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#home">Home</a>
+      <a href="#band">The Band</a>
+      <a href="#setlist">Setlist</a>
+      <a href="#gigs">Live Dates</a>
+      <a href="#videos">Videos</a>
+      <a href="#contact">Book Us</a>
+    </nav>
+    <p class="menu__foot">High energy rock covers · The Black Country</p>
+  </div>
+
   <main>
-    <!-- ===================== HERO / HOME ===================== -->
-    <section class="hero" id="home">
-      <div class="hero__inner">
-        <p class="hero__eyebrow reveal">Modern &amp; Classic Hard Rock Covers</p>
-        <h1 class="hero__logo reveal" style="--d:1"><img src="assets/logo.jpg" alt="Splinter" /></h1>
-        <div class="hero__cta reveal" style="--d:2">
-          <a href="#gigs" class="btn btn--solid">Live dates</a>
-          <a href="#videos" class="btn btn--ghost">Watch us play</a>
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home" aria-label="Splinter — high energy rock covers">
+      <video class="hero__video" id="heroVideo" muted loop playsinline preload="none"
+             poster="assets/poster/hero-poster.jpg" aria-hidden="true"
+             data-src="assets/poster/hero.mp4" data-src-mobile="assets/poster/hero-m.mp4"></video>
+      <div class="hero__dots" aria-hidden="true"></div>
+      <canvas class="hero__burst" id="burst" aria-hidden="true"></canvas>
+
+      <div class="hero__stage">
+        <h1 class="hero__logo" id="heroLogo">
+          <img src="assets/poster/logo-poster.png" alt="Splinter" width="1707" height="965" fetchpriority="high" data-classic="assets/poster/logo.png" />
+        </h1>
+        <p class="hero__shout" aria-label="High energy rock covers!">
+          <span>High energy</span>
+          <span>rock covers!</span>
+        </p>
+      </div>
+
+      <div class="hero__foot">
+        <div class="next" id="nextGig">
+          <p class="next__label"><span class="blink" aria-hidden="true"></span><span id="nextLabel">Next up</span></p>
+          <p class="next__date" id="nextDate">Live &amp; loud</p>
+          <p class="next__venue" id="nextVenue">Pubs, clubs and festivals across the Black Country</p>
         </div>
+        <a class="doors" href="#gigs" id="doors">
+          <span class="doors__label" id="doorsLabel">Live dates</span>
+          <span class="doors__count" id="countdown" aria-live="off">See the list</span>
+          <span class="doors__more">All dates <span aria-hidden="true">↓</span></span>
+        </a>
       </div>
     </section>
 
-    <!-- ===================== MARQUEE ===================== -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Black Stone Cherry ✦ Muse ✦ Royal Blood ✦ Queens Of The Stone Age ✦&nbsp;</span>
-        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Black Stone Cherry ✦ Muse ✦ Royal Blood ✦ Queens Of The Stone Age ✦&nbsp;</span>
-      </div>
+    <!-- ===================== TAPE ===================== -->
+    <div class="tapes" aria-hidden="true">
+      <div class="tape tape--a"><div class="tape__track">
+        <span>High energy rock covers ✦ Live &amp; loud ✦ The Black Country ✦ Five decades of riffs ✦&nbsp;</span>
+        <span>High energy rock covers ✦ Live &amp; loud ✦ The Black Country ✦ Five decades of riffs ✦&nbsp;</span>
+      </div></div>
+      <div class="tape tape--b"><div class="tape__track">
+        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Foo Fighters ✦ Muse ✦ Black Stone Cherry ✦ Royal Blood ✦ Queens of the Stone Age ✦&nbsp;</span>
+        <span>AC/DC ✦ Guns N’ Roses ✦ Black Sabbath ✦ Foo Fighters ✦ Muse ✦ Black Stone Cherry ✦ Royal Blood ✦ Queens of the Stone Age ✦&nbsp;</span>
+      </div></div>
     </div>
 
-    <!-- ===================== BIO ===================== -->
-    <section class="section bio" id="bio">
-      <div class="section__head">
-        <span class="section__index">01</span>
-        <h2 class="section__title">The Band</h2>
-      </div>
-      <div class="bio__grid bio__grid--solo">
-        <figure class="bio__portrait" hidden>
-          <div class="bio__portrait-frame">
-            <!-- EDIT ME: drop a band photo at assets/band.jpg, point this here, then remove the `hidden` above to show it -->
-            <img src="assets/portrait-placeholder.svg" alt="Splinter live on stage" />
-          </div>
-        </figure>
-        <div class="bio__text">
-          <p class="bio__lead">
+    <!-- ===================== THE BAND ===================== -->
+    <section class="sheet sheet--paper band" id="band" data-torn>
+      <header class="head">
+        <p class="head__no">№ 01 <span>/ The Band</span></p>
+        <h2 class="head__title reveal"><span>Five decades</span> <span>of rock.</span> <span class="hollow">One setlist.</span></h2>
+      </header>
+
+      <div class="band__grid">
+        <div class="snaps">
+          <figure class="snap reveal">
+            <span class="snap__tape snap__tape--l" aria-hidden="true"></span>
+            <span class="snap__tape snap__tape--r" aria-hidden="true"></span>
+            <div class="print">
+              <img src="assets/poster/band-on-stage.webp" alt="Splinter on stage: the bassist, the singer at the mic, the drummer behind the kit and the guitarist in the foreground" width="1600" height="1031" loading="lazy" />
+            </div>
+            <figcaption>Exhibit A — up close and personal.</figcaption>
+          </figure>
+          <figure class="snap snap--b reveal">
+            <span class="snap__tape snap__tape--c" aria-hidden="true"></span>
+            <div class="print">
+              <img src="assets/poster/band-crowd.webp" alt="Splinter playing to a packed room, seen from the back of the crowd" width="1600" height="1074" loading="lazy" />
+            </div>
+            <figcaption>Exhibit B — the view from the back of the room.</figcaption>
+          </figure>
+        </div>
+
+        <div class="band__text">
+          <p class="lead reveal">
             Splinter — a high-energy rock covers band from the Black Country,
             smashing out the best heavy rock tracks from the past five decades.
           </p>
-          <p>
+          <p class="reveal">
             From AC/DC, Guns N’ Roses and Black Sabbath through to Black Stone Cherry,
             Muse, Royal Blood and Queens of the Stone Age — if it’s loud and it riffs,
             it’s in the set. Expect a relentless, high-octane show built to get a room moving.
           </p>
-          <ul class="bio__facts">
-            <li><span>Based in</span> The Black Country, UK</li>
-            <li><span>Style</span> Heavy rock covers</li>
-            <li><span>For fans of</span> AC/DC · Sabbath · QOTSA</li>
-          </ul>
+          <dl class="facts reveal">
+            <div><dt>Based in</dt><dd>The Black Country, UK</dd></div>
+            <div><dt>Style</dt><dd>Heavy rock covers</dd></div>
+            <div><dt>For fans of</dt><dd>AC/DC · Sabbath · QOTSA</dd></div>
+          </dl>
+          <p class="scrawl reveal" aria-hidden="true">
+            <svg viewBox="0 0 120 60" width="96" height="48"><path d="M6 12c22 30 52 40 96 34M86 34l18 12-20 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            bring earplugs.
+          </p>
         </div>
       </div>
     </section>
 
+    <!-- ===================== SETLIST ===================== -->
+    <section class="sheet sheet--ink setlist" id="setlist">
+      <div class="setlist__bg" aria-hidden="true"></div>
+      <header class="head">
+        <p class="head__no">№ 02 <span>/ The Setlist</span></p>
+        <h2 class="head__title reveal"><span>If it riffs,</span> <span class="hollow">it’s in.</span></h2>
+      </header>
+      <ol class="acts" aria-label="Artists we cover">
+        <li class="act" data-drift="-1"><span class="act__no">01</span><span class="act__name">AC/DC</span></li>
+        <li class="act" data-drift="1"><span class="act__no">02</span><span class="act__name">Guns N’ Roses</span></li>
+        <li class="act" data-drift="-1"><span class="act__no">03</span><span class="act__name">Black Sabbath</span></li>
+        <li class="act" data-drift="1"><span class="act__no">04</span><span class="act__name">Foo Fighters</span></li>
+        <li class="act" data-drift="-1"><span class="act__no">05</span><span class="act__name">Muse</span></li>
+        <li class="act" data-drift="1"><span class="act__no">06</span><span class="act__name">Black Stone Cherry</span></li>
+        <li class="act" data-drift="-1"><span class="act__no">07</span><span class="act__name">Royal Blood</span></li>
+        <li class="act" data-drift="1"><span class="act__no">08</span><span class="act__name">Queens of the Stone Age</span></li>
+      </ol>
+      <p class="setlist__more">…and plenty more where that came from.</p>
+    </section>
+
     <!-- ===================== GIGS ===================== -->
-    <section class="section gigs" id="gigs">
-      <div class="section__head">
-        <span class="section__index">02</span>
-        <h2 class="section__title">Live Dates</h2>
-      </div>
+    <section class="sheet sheet--paper gigs" id="gigs" data-torn>
+      <header class="head">
+        <p class="head__no">№ 03 <span>/ Live Dates</span></p>
+        <h2 class="head__title reveal"><span id="gigYear">2026</span> <span class="hollow">Gig list.</span></h2>
+      </header>
+
       <div class="gigs__body">
-        <div class="gigs__group">
-          <h3 class="gigs__subtitle">Upcoming</h3>
-          <ul class="gig-list" id="upcomingGigs">
-            <li class="gig-list__loading">Loading dates…</li>
-          </ul>
-        </div>
-        <div class="gigs__group gigs__group--past" id="pastGroup" hidden>
-          <h3 class="gigs__subtitle">Past shows</h3>
+        <ul class="gig-list" id="upcomingGigs">
+          <li class="gig-list__note">Loading dates…</li>
+        </ul>
+
+        <details class="past" id="pastGroup" hidden>
+          <summary><span>Past shows</span> <span class="past__count" id="pastCount"></span></summary>
           <ul class="gig-list gig-list--past" id="pastGigs"></ul>
-        </div>
+        </details>
+      </div>
+
+      <div class="sticker" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><polygon id="stickerBurst" points="" /></svg>
+        <span>Play<br>it<br>loud</span>
       </div>
     </section>
 
     <!-- ===================== VIDEOS ===================== -->
-    <section class="section videos" id="videos">
-      <div class="section__head">
-        <span class="section__index">03</span>
-        <h2 class="section__title">Videos</h2>
-      </div>
+    <section class="sheet sheet--ink videos" id="videos">
+      <header class="head">
+        <p class="head__no">№ 04 <span>/ Videos</span></p>
+        <h2 class="head__title reveal"><span>See us</span> <span class="hollow">in action.</span></h2>
+      </header>
       <div class="video-grid" id="videoGrid">
-        <p class="video-grid__loading">Loading videos…</p>
+        <p class="video-grid__note">Loading videos…</p>
       </div>
     </section>
 
     <!-- ===================== CONTACT ===================== -->
-    <section class="section contact" id="contact">
-      <div class="section__head">
-        <span class="section__index">04</span>
-        <h2 class="section__title">Book Us</h2>
-      </div>
-      <div class="contact__inner">
-        <p class="contact__lead">Pubs, clubs, festivals, parties — let’s make some noise.</p>
-        <a class="contact__email" href="mailto:splinterbcc@gmail.com">splinterbcc@gmail.com</a>
-        <ul class="contact__socials" aria-label="Social links">
-          <li><a href="https://www.instagram.com/splinter.rockband/" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/splinterrockband" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://www.youtube.com/@Splinterrockband" target="_blank" rel="noopener">YouTube</a></li>
+    <section class="sheet sheet--paper contact" id="contact" data-torn>
+      <img class="contact__skull" src="assets/poster/skull-poster.png" alt="" width="486" height="413" loading="lazy" aria-hidden="true" data-classic="assets/poster/skull.png" />
+      <header class="head">
+        <p class="head__no">№ 05 <span>/ Book Us</span></p>
+        <h2 class="head__title head__title--xl reveal"><span>Let’s make</span> <span>some</span> <span class="hollow">noise.</span></h2>
+      </header>
+      <div class="contact__body">
+        <p class="lead reveal">Pubs, clubs, festivals, parties — drop us a line and we’ll bring the volume.</p>
+        <a class="contact__email reveal" href="mailto:splinterbcc@gmail.com">splinterbcc@gmail.com</a>
+        <ul class="socials reveal" aria-label="Social links">
+          <li><a href="https://www.instagram.com/splinter.rockband/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.facebook.com/splinterrockband" target="_blank" rel="noopener">Facebook <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.youtube.com/@Splinterrockband" target="_blank" rel="noopener">YouTube <span aria-hidden="true">↗</span></a></li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© <span id="year"></span> Splinter</span>
-    <a href="#home" class="footer__top">Back to top ↑</a>
+    <img src="assets/poster/logo-poster-720.png" alt="" width="720" height="407" loading="lazy" data-classic="assets/poster/logo-720.png" />
+    <p>© <span id="year">2026</span> Splinter · The Black Country, UK</p>
+    <a href="#home">Back to top ↑</a>
   </footer>
 
-  <script src="assets/app.js?v=2"></script>
+  <script src="assets/poster.js?v=4" defer></script>
 </body>
 </html>
