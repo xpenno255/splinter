@@ -11,18 +11,21 @@ Web Apps**.
 ```
 index.html                 ← page structure + written copy (bio, email, socials)
 assets/
-  styles.css               ← all colours & fonts at the top (design tokens)
-  app.js                   ← behaviour + your YouTube channel settings (CONFIG)
-  logo.svg                 ← REPLACE with your real logo when you have one
-  favicon.svg              ← browser-tab icon (optional to change)
-  portrait-placeholder.svg ← REPLACE with a band photo (assets/band.jpg)
+  poster.css               ← all colours & fonts at the top (design tokens)
+  poster.js                ← behaviour + your YouTube channel settings (CONFIG)
+  poster/                  ← logo, band photos, hero video and other images
 data/
   gigs.json                ← YOUR LIVE DATES — edit to add/remove shows
   videos.json              ← optional: pin specific YouTube videos
 staticwebapp.config.json   ← Azure settings (leave as-is)
 ```
 
-Everywhere you should edit is marked **`EDIT ME`** in the code.
+The site is the black-and-white gig-poster design. `assets/styles.css`,
+`assets/app.js` and the other loose files in `assets/` belong to the previous
+design and are no longer used by the page.
+
+To swap a band photo, replace `assets/poster/band-on-stage.webp` or
+`assets/poster/band-crowd.webp` with a new image of the same name.
 
 ---
 
@@ -51,8 +54,8 @@ them, shows a **Tickets** button (unless sold out), and adds **Sold out** /
 ## 3. Videos
 
 By default the Videos section shows your **channel's latest uploads**
-automatically (set in `assets/app.js` → `CONFIG.uploadsPlaylistId`, currently
-your channel `@Splinterbcc`). You don't have to do anything.
+automatically (set in `assets/poster.js` → `CONFIG.uploadsPlaylistId`, currently
+your channel `@Splinterrockband`). You don't have to do anything.
 
 To **pin specific videos** instead, add them to `data/videos.json`:
 
@@ -108,10 +111,9 @@ Free SSL is included automatically.
 
 ## 6. Rebranding / colours
 
-Open `assets/styles.css`. The first block (`:root`) holds every colour and
-font. The current theme is `--accent: #ff3d1f` (molten orange-red) on
-near-black with the industrial **Big Shoulders Display** typeface. Change those
-values to match your logo once you have it.
+Open `assets/poster.css`. The first block (`:root`) holds every colour and
+font. The current theme is two inks only, black (`--ink`) and off-white paper
+(`--paper`), with the condensed **Anton** typeface for headlines.
 
 ---
 
